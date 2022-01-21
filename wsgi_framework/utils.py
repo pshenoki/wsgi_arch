@@ -45,6 +45,6 @@ def parse_wsgi_input_data(data: bytes) -> dict:
     return result
 
 
-def save_to_file(data):
-    with open('data.txt', 'a', encoding='UTF-8') as outfile:
+def save_to_file(data, filename):
+    with open(filename, 'a', encoding='UTF-8') as outfile:
         outfile.write(f"{data}\n")
