@@ -1,0 +1,1 @@
+waitress-serve --listen=localhost:8000 main_app:run_object
