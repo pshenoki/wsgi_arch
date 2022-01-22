@@ -8,6 +8,10 @@
         <h2>{{front_request.top_page}} </h2>
         <P>{{say_me}}</P>
         <p> Добро пожаловать на наш сайт
+        {%- if front_request.fname and front_request.lname %}
+            {{front_request.fname}} {{front_request.lname}}
+        {% endif -%}
+        </p>
         <h2>{{front_request.bottom_page}}</h2>
     </body>
 </html>
