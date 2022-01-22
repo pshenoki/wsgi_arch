@@ -1,6 +1,3 @@
-import json
-
-
 def check_slash(route: str) -> str:
     """ Если есть '/' убирает его """
     if route == '/':
@@ -28,7 +25,6 @@ def get_wsgi_input_data(env) -> bytes:
     # приводим к int
     content_length = int(content_length_data) if content_length_data else 0
     # считываем данные если они есть
-    print(env['wsgi.input'])
     data = env['wsgi.input'].read(content_length) if content_length > 0 else b''
     return data
 
@@ -37,7 +33,6 @@ def parse_wsgi_input_data(data: bytes) -> dict:
     """ Декодируем байты в строку """
     result = {}
     if data:
-        print(data)
         # декодируем данные
         data_str = data.decode(encoding='utf-8')
         # собираем их в словарь
