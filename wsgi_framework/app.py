@@ -1,6 +1,6 @@
 from wsgi_framework.page_controllers import NotFoundPage
 from wsgi_framework.utils import check_slash
-from wsgi_framework.utils import get_wsgi_input_data, parse_wsgi_input_data, save_to_file, parse_input_data
+from wsgi_framework.utils import get_wsgi_input_data, parse_wsgi_input_data, parse_input_data
 
 
 class Application:
@@ -38,4 +38,3 @@ class Application:
 
         start_response(code, [('Content-Type', 'text/html')])
         return [body]
-

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %} </title>
+    </head>
+    <body>
+        <nav class="top-menu">
+            <ul class="menu-main">
+                <li><a href="/" class="current">main</a></li>
+                <li><a href="/water">water</a></li>
+                <li><a href="/fire">fire</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        {% block main %}{% endblock %}
+
+    </body>
+</html>

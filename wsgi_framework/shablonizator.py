@@ -1,17 +1,11 @@
-from jinja2 import Template
+from jinja2 import FileSystemLoader
+from jinja2.environment import Environment
 
 
-def render(template_path, template_name, **kwargs):
-    """
-    Минимальный пример работы с шаблонизатором
-    :param template_path: путь до шаблона
-    :param template_name: имя шаблона
-    :param kwargs: параметры для передачи в шаблон
-    :return:
-    """
-    # Открываем шаблон по имени
-    with open(f"{template_path}/{template_name}", encoding='utf-8') as f:
-        # Читаем
-        template = Template(f.read())
-    # рендерим шаблон с параметрами
+def render(template_name, folder='templates', **kwargs):
+    env = Environment()
+    # указываем папку для поиска шаблонов
+    env.loader = FileSystemLoader(folder)
+    # находим шаблон в окружении
+    template = env.get_template(template_name)
     return template.render(**kwargs)

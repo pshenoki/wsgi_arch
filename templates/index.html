@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <title>Pokemon </title>
-    </head>
-    <body>
-        <h2>{{front_request.top_page}} </h2>
-        <P>{{say_me}}</P>
-        <p> Добро пожаловать на наш сайт
-        <h2>{{front_request.bottom_page}}</h2>
-    </body>
-</html>
+{% extends 'base.html'%}
+{% block title %} Pokemon {% endblock %}
+{% block main %}
+
+    <h2>{{front_request.top_page}} </h2>
+    <P>{{say_me}}</P>
+    <p> Добро пожаловать на наш сайт
+    <h2>{{front_request.bottom_page}}</h2>
+
+{% endblock %}
