@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %} Elements {% endblock %}
+{% block main %}
+
+    <h1>{{front_request.top_page}} </h1>
+        <P>{{say_me}}</P>
+        {% if object_list %}
+        <ul>
+            {%- for curs in object_list %}
+            <li> {{curs.curs_name}}</li>
+            {% endfor -%}
+        </ul>
+        {% else %}
+        <P>Пока здесь нет курсов :(</P>
+        {% endif %}
+    <h1>{{front_request.bottom_page}}</h1>
+
+{% endblock %}

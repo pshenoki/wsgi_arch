@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %} Elements {% endblock %}
+{% block main %}
+
+    <h1>{{front_request.top_page}} </h1>
+        <P>{{say_me}}</P>
+        {% if object_list %}
+        <ul>
+            {%- for category in object_list %}
+            <li> {{category.category_name}}</li>
+            {% endfor -%}
+        </ul>
+        {% else %}
+        <P>Пока здесь нет категорий :( </P>
+        {% endif %}
+    <h1>{{front_request.bottom_page}}</h1>
+
+{% endblock %}
