@@ -2,7 +2,7 @@ from wsgi_framework.page_controllers import PageController
 from wsgi_framework.shablonizator import render
 from wsgi_framework.utils import save_to_file
 from utils import info_we_need
-from models import category_list, CategoryModel, curs_list, CursFactory
+from models import Director
 
 
 class IndexPage(PageController):
@@ -57,18 +57,18 @@ class CreateCategory(PageController):
 
         elif request['method'] == "POST":
             save_to_file(data=request, filename='post_data.txt')
-            category = CategoryModel(request)
-            category.insert_cat_list(category_list)
+            cat = Director.create_category(request)
+            Director.update_category_dict(cat)
             return '200 OK', render(template_name='categores.html',
-                                    object_list=category_list,
-                                    say_me='Список доступных категорий:',
+                                    object_list=Director.category_dict,
+                                    say_me='Список доступных категорий и курсов:',
                                     front_request=request).encode('UTF-8')
 
 
 class CategoryList(PageController):
     def __call__(self, request):
         return '200 OK', render(template_name='categores.html',
-                                object_list=category_list,
+                                object_list=Director.category_dict,
                                 say_me='Список доступных категорий:',
                                 front_request=request).encode('UTF-8')
 
@@ -84,18 +84,9 @@ class CreateCurs(PageController):
 
         elif request['method'] == "POST":
             save_to_file(data=request, filename='post_data.txt')
-            curs = CursFactory.create(request)
-            if curs:
-                curs.insert_curs_list(curs_list)
-            return '200 OK', render(template_name='curses.html',
-                                    object_list=curs_list,
-                                    say_me='Список доступных курсов:',
+            curs = Director.create_curs(request)
+            Director.insert_curs_to_category(curs)
+            return '200 OK', render(template_name='categores.html',
+                                    object_list=Director.category_dict,
+                                    say_me='Список доступных категорий и курсов:',
                                     front_request=request).encode('UTF-8')
-
-
-class CursList(PageController):
-    def __call__(self, request):
-        return '200 OK', render(template_name='curses.html',
-                                object_list=curs_list,
-                                say_me='Список доступных курсов:',
-                                front_request=request).encode('UTF-8')

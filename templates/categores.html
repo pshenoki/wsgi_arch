@@ -6,8 +6,13 @@
         <P>{{say_me}}</P>
         {% if object_list %}
         <ul>
-            {%- for category in object_list %}
+            {%- for category in object_list.values() %}
             <li> {{category.category_name}}</li>
+                <ul>
+                    {%- for curs in category.curses %}
+                    <li> {{curs.curs_name}}  (тип курса - {{curs.curs_type}}) </li>
+                    {% endfor -%}
+                </ul>
             {% endfor -%}
         </ul>
         {% else %}
