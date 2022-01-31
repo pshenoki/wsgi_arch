@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% block title %} Elements {% endblock %}
+{% block main %}
+
+    <h1>{{front_request.top_page}} </h1>
+        <P>{{say_me}}</P>
+        {% if object_list %}
+        <ul>
+            {%- for category in object_list.values() %}
+            <li> {{category.category_name}}</li>
+                <ul>
+                    {%- for curs in category.curses %}
+                    <li> {{curs.curs_name}}  (тип курса - {{curs.curs_type}}) </li>
+                    {% endfor -%}
+                </ul>
+            {% endfor -%}
+        </ul>
+        {% else %}
+        <P>Пока здесь нет категорий :( </P>
+        {% endif %}
+    <h1>{{front_request.bottom_page}}</h1>
+
+{% endblock %}
