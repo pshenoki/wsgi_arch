@@ -38,3 +38,27 @@ class Application:
 
         start_response(code, [('Content-Type', 'text/html')])
         return [body]
+
+
+class ProxyLogApplication(Application):
+
+    def __init__(self, routes, fronts):
+        self.application = Application(routes, fronts)
+        super().__init__(routes, fronts)
+
+    def __call__(self, environ, start_response):
+        print(environ['REQUEST_METHOD'])
+        print(environ)
+
+        return self.application(environ, start_response)
+
+
+class ProxyFakeApplication(Application):
+
+    def __init__(self, routes, fronts):
+        self.application = Application(routes, fronts)
+        super().__init__(routes, fronts)
+
+    def __call__(self, environ, start_response):
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [b'Hello from Fake']
