@@ -1,11 +1,8 @@
-from page_controllers import IndexPage, FirePage, WaterPage, ContactPage, \
-    CreateCategory, CategoryList, CreateCurs
+from page_controllers import IndexPage, ContactPage, CreateCategory, CategoryList, CreateCurs
 from front_controllers import TopFront, BottomFront
 
 ROUTES = {
     '/': IndexPage(),
-    '/fire': FirePage(),
-    '/water': WaterPage(),
     '/contact': ContactPage(),
     '/createcat': CreateCategory(),
     '/categores': CategoryList(),

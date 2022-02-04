@@ -3,8 +3,10 @@ from wsgi_framework.shablonizator import render
 from wsgi_framework.utils import save_to_file
 from utils import info_we_need
 from models import Director
+from utils import debug
 
 
+@debug
 class IndexPage(PageController):
     def __call__(self, request):
         return '200 OK', render(template_name='index.html',
@@ -12,24 +14,7 @@ class IndexPage(PageController):
                                 front_request=request).encode('UTF-8')
 
 
-class FirePage(PageController):
-    def __call__(self, request):
-        return '200 OK', render(template_name='element.html',
-                                object_list=[{'name': 'Flareon', 'number': 1},
-                                             {'name': 'Charmander', 'number': 4}],
-                                say_me='FIRE PAGE',
-                                front_request=request).encode('UTF-8')
-
-
-class WaterPage(PageController):
-    def __call__(self, request):
-        return '200 OK', render(template_name='element.html',
-                                object_list=[{'name': 'Megicarp', 'number': 11},
-                                             {'name': 'Blastoise', 'number': 8}],
-                                say_me='WATER PAGE',
-                                front_request=request).encode('UTF-8')
-
-
+@debug
 class ContactPage(PageController):
     def __call__(self, request):
 
@@ -45,7 +30,7 @@ class ContactPage(PageController):
                                     say_me='Поздравляю',
                                     front_request=request).encode('UTF-8')
 
-
+@debug
 class CreateCategory(PageController):
     def __call__(self, request):
 
