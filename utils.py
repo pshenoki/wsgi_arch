@@ -20,3 +20,10 @@ def debug(acls):
         return result
 
     return inner
+
+
+def id_counter_gen():
+    count = 0
+    while True:
+        count += 1
+        yield count

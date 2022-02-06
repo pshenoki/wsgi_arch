@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %} Create {% endblock %}
+{% block main %}
+
+    <h2>{{front_request.top_page}} </h2>
+        <P>{{say_me}}</P>
+        <form method="post" target="_blank">
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" ><br><br>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    <h2>{{front_request.bottom_page}}</h2>
+
+{% endblock %}

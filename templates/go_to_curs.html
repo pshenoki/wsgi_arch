@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %} Create {% endblock %}
+{% block main %}
+
+    <h2>{{front_request.top_page}} </h2>
+        <P>{{say_me}}</P>
+        <form method="post" target="_blank">
+            <label for="curs_name">Curs name:</label>
+            <input type="text" id="curs_name" name="curs_name" ><br><br>
+            <label for="curs_cat">Выберите категорию курса: </label>
+            <input type="text" id="curs_cat" name="curs_cat" ><br><br>
+            <label for="student_id">Напишите свой ID:</label>
+            <input type="text" id="student_id" name="student_id" ><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    <h2>{{front_request.bottom_page}}</h2>
+
+{% endblock %}
