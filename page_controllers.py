@@ -2,7 +2,7 @@ from wsgi_framework.page_controllers import PageController
 from wsgi_framework.shablonizator import render
 from wsgi_framework.utils import save_to_file
 from utils import info_we_need
-from models import Director
+from models import Director, CategoryDirector, CursDirector
 from utils import debug
 
 
@@ -30,6 +30,7 @@ class ContactPage(PageController):
                                     say_me='Поздравляю',
                                     front_request=request).encode('UTF-8')
 
+
 @debug
 class CreateCategory(PageController):
     def __call__(self, request):
@@ -43,17 +44,35 @@ class CreateCategory(PageController):
         elif request['method'] == "POST":
             save_to_file(data=request, filename='post_data.txt')
             cat = Director.create_category(request)
-            Director.update_category_dict(cat)
+            CategoryDirector.update(cat)
             return '200 OK', render(template_name='categores.html',
-                                    object_list=Director.category_dict,
+                                    object_list=CategoryDirector.category_dict,
                                     say_me='Список доступных категорий и курсов:',
+                                    front_request=request).encode('UTF-8')
+
+
+class CategoryApi(PageController):
+    def __call__(self, request):
+
+        if request['method'] == "GET":
+            save_to_file(data=request, filename='get_data.txt')
+            return '200 OK', render(template_name='category_api.html',
+                                    say_me='Выберите название категории для получения информации,'
+                                           ' для получения информации по всем категориям напишите "all":',
+                                    front_request=request).encode('UTF-8')
+
+        elif request['method'] == "POST":
+            save_to_file(data=request, filename='post_data.txt')
+            memento = Director.create_memento_category(request)
+            memento.memento_json()
+            return '200 OK', render(template_name='memento_category.json',
                                     front_request=request).encode('UTF-8')
 
 
 class CategoryList(PageController):
     def __call__(self, request):
         return '200 OK', render(template_name='categores.html',
-                                object_list=Director.category_dict,
+                                object_list=CategoryDirector.category_dict,
                                 say_me='Список доступных категорий:',
                                 front_request=request).encode('UTF-8')
 
@@ -70,8 +89,46 @@ class CreateCurs(PageController):
         elif request['method'] == "POST":
             save_to_file(data=request, filename='post_data.txt')
             curs = Director.create_curs(request)
-            Director.insert_curs_to_category(curs)
+            CategoryDirector.insert_curs_to_category(curs)
             return '200 OK', render(template_name='categores.html',
-                                    object_list=Director.category_dict,
+                                    object_list=CategoryDirector.category_dict,
+                                    say_me='Список доступных категорий и курсов:',
+                                    front_request=request).encode('UTF-8')
+
+
+class CreateStudent(PageController):
+    def __call__(self, request):
+
+        if request['method'] == "GET":
+            save_to_file(data=request, filename='get_data.txt')
+            return '200 OK', render(template_name='create_student.html',
+                                    say_me='Представьтесь и выберите курс:',
+                                    front_request=request).encode('UTF-8')
+
+        elif request['method'] == "POST":
+            save_to_file(data=request, filename='post_data.txt')
+            student = Director.create_student(request)
+            CursDirector.insert_student_to_students_list(student)
+            return '200 OK', render(template_name='id.html',
+                                    object_list=(student.get_id(), student.all_students),
+                                    say_me='Список доступных категорий и курсов:',
+                                    front_request=request).encode('UTF-8')
+
+
+class GoToCurs(PageController):
+    def __call__(self, request):
+
+        if request['method'] == "GET":
+            save_to_file(data=request, filename='get_data.txt')
+            return '200 OK', render(template_name='go_to_curs.html',
+                                    say_me='Представьтесь и выберите курс:',
+                                    front_request=request).encode('UTF-8')
+
+        elif request['method'] == "POST":
+            save_to_file(data=request, filename='post_data.txt')
+            claim = Director.create_claim(request)
+            CursDirector.insert_student_to_curs(curs=claim.find_curs(), student=claim.find_student())
+            return '200 OK', render(template_name='categores.html',
+                                    object_list=CategoryDirector.category_dict,
                                     say_me='Список доступных категорий и курсов:',
                                     front_request=request).encode('UTF-8')

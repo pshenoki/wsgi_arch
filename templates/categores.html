@@ -11,6 +11,11 @@
                 <ul>
                     {%- for curs in category.curses %}
                     <li> {{curs.curs_name}}  (тип курса - {{curs.curs_type}}) </li>
+                        <ul>
+                            {%- for student in curs.students_list %}
+                            <li> Ученик: {{student.fname}} {{student.lname}}  ID:{{student.id}} </li>
+                            {% endfor -%}
+                        </ul>
                     {% endfor -%}
                 </ul>
             {% endfor -%}
