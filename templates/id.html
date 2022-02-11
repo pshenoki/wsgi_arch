@@ -9,6 +9,15 @@
         <li> {{st.fname}} - {{st.lname}} - {{st.id}}</li>
         {% endfor -%}
     </ul>
+
+    <p> ----------------------------------------------------------  </p>
+    <P>Пожалуйста запомните ваш ID : {{db_list_stud[1]}}</P>
+    <ul>
+        {%- for st in db_list_stud[0] %}
+        <li> {{st[1]}} - {{st[2]}} - {{st[0]}} </li>
+        {% endfor -%}
+    </ul>
+
     <p> Добро пожаловать на наш сайт
     <h2>{{front_request.bottom_page}}</h2>
 
