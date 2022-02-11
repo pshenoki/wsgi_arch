@@ -23,6 +23,24 @@
         {% else %}
         <P>Пока здесь нет категорий :( </P>
         {% endif %}
+
+        <P> ------------------------------------------------------------------------------- </P>
+        {% if db_list %}
+        <ul>
+            {%- for catname in db_list %}
+                <li> {{catname}} </li>
+                    <ul>
+                        {%- for curs in db_list_curs %}
+                            {% if curs[2] == catname %}
+                                <li> {{curs}} </li>
+                            {% endif %}
+                        {% endfor -%}
+        </ul>
+            {% endfor -%}
+        </ul>
+        {% endif %}
+
+
     <h1>{{front_request.bottom_page}}</h1>
 
 {% endblock %}
