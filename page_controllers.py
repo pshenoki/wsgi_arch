@@ -2,7 +2,8 @@ from wsgi_framework.page_controllers import PageController
 from wsgi_framework.shablonizator import render
 from wsgi_framework.utils import save_to_file
 from utils import info_we_need, debug
-from models import Director, CategoryDirector, CursDirector
+from model.main_director import Director
+from model.director_model import CategoryDirector, CursDirector
 from sql_mapper import CategoryMapper, CursMapper, StudentMapper
 from config import CONNECTION
 import json
@@ -74,6 +75,8 @@ class CategoryApi(PageController):
             save_to_file(data=request, filename='post_data.txt')
             memento = Director.create_memento_category(request)
             memento.memento_json()
+            return '200 OK', json.dumps('memento_category.json')
+            # оставлю пока, чтобы видеть json
             return '200 OK', render(template_name='memento_category.json',
                                     front_request=request).encode('UTF-8')
 
