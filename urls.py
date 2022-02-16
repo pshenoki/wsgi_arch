@@ -1,5 +1,5 @@
 from page_controllers import IndexPage, ContactPage, CreateCategory, CategoryList,\
-    CreateCurs, CreateStudent, GoToCurs, CategoryApi
+    CreateCurs, CreateStudent, GoToCurs, CategoryApi, AddMoney
 from front_controllers import TopFront, BottomFront
 
 ROUTES = {
@@ -11,6 +11,7 @@ ROUTES = {
     '/createstudent': CreateStudent(),
     '/gotocurs': GoToCurs(),
     '/categoryapi': CategoryApi(),
+    '/addmoney': AddMoney(),
 }
 
 FRONTS = [TopFront(), BottomFront()]

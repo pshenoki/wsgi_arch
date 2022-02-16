@@ -11,10 +11,14 @@ class StudentModel:
         self.fname = request['fname']
         self.lname = request['lname']
         self.email = request['email']
+        self.tokens = 0
         self.id = next(self.id_counter)
 
     def get_id(self):
         return self.id
+
+    def add_token(self, token):
+        self.tokens += token
 
     @classmethod
     def return_student_by_id(cls, st_id):
