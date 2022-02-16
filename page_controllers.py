@@ -4,6 +4,7 @@ from wsgi_framework.utils import save_to_file
 from utils import info_we_need, debug
 from model.main_director import Director
 from model.director_model import CategoryDirector, CursDirector
+from model.main_model import StudentModel
 from sql_mapper import CategoryMapper, CursMapper, StudentMapper
 from config import CONNECTION
 import json
@@ -75,7 +76,7 @@ class CategoryApi(PageController):
             save_to_file(data=request, filename='post_data.txt')
             memento = Director.create_memento_category(request)
             memento.memento_json()
-            return '200 OK', json.dumps('memento_category.json')
+            # return '200 OK', json.dumps('memento_category.json')
             # оставлю пока, чтобы видеть json
             return '200 OK', render(template_name='memento_category.json',
                                     front_request=request).encode('UTF-8')
@@ -138,6 +139,26 @@ class CreateStudent(PageController):
                                                   student_mapper.return_id_by_name(request['lname'],
                                                                                    request['fname'])),
                                     say_me='Список доступных категорий и курсов:',
+                                    front_request=request).encode('UTF-8')
+
+
+class AddMoney(PageController):
+    def __call__(self, request):
+
+        if request['method'] == "GET":
+            save_to_file(data=request, filename='get_data.txt')
+            return '200 OK', render(template_name='addmoney.html',
+                                    say_me='Введите ID студенда и колличество токенов:',
+                                    front_request=request).encode('UTF-8')
+
+        elif request['method'] == "POST":
+            save_to_file(data=request, filename='post_data.txt')
+            student = StudentModel.return_student_by_id(request['id_student'])
+            student.add_token(int(request['token']))
+
+            return '200 OK', render(template_name='tokens.html',
+                                    object_list=StudentModel.all_students,
+                                    say_me='Рейтинг студентов:',
                                     front_request=request).encode('UTF-8')
 
 
