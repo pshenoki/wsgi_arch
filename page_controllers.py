@@ -155,7 +155,7 @@ class AddMoney(PageController):
             save_to_file(data=request, filename='post_data.txt')
             student = StudentModel.return_student_by_id(request['id_student'])
             student.add_token(int(request['token']))
-
+            student_mapper.insert_tokens_to_student(stud_id=request['id_student'], tokens=request['token'])
             return '200 OK', render(template_name='tokens.html',
                                     object_list=StudentModel.all_students,
                                     say_me='Рейтинг студентов:',
