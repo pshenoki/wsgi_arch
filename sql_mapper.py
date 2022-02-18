@@ -45,6 +45,11 @@ class TableCreator:
             student_id INTEGER);
             """)
 
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS student_tokens (
+             student_id INTEGER,
+             tokens INTEGER);
+             """)
+
             print('таблицы созданы')
 
 
@@ -77,6 +82,12 @@ class StudentMapper(Mapper):
     def insert_student_to_curs(self, curs_id, stud_id):
         self.cursor.execute(f"""INSERT INTO curs_student_rel (curs_id, student_id)
                             VALUES ('{stud_id}', '{curs_id}')""")
+
+        self.connection.commit()
+
+    def insert_tokens_to_student(self, stud_id, tokens):
+        self.cursor.execute(f"""INSERT INTO curs_student_rel (curs_id, student_id)
+                            VALUES ('{stud_id}', '{tokens}')""")
 
         self.connection.commit()
 
